@@ -10,23 +10,18 @@ SCREEN_HEIGHT = 500
 BG = (50, 50, 50)
 BLACK = (0, 0, 0)
 
-class Game:
-	def __init__(self):
-		pygame.init()
-		self.screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
-		pygame.display.set_caption('Spritesheets')
+pygame.init()
+screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
+pygame.display.set_caption('Spritesheets')
 
+x = (pygame.display.get_surface().get_width() // 2) - 250
+y = pygame.display.get_surface().get_height() - 250
 
-
-		x = (pygame.display.get_surface().get_width() // 2) - 250
-		y = pygame.display.get_surface().get_height() - 250
-
-		self.dialog = "* Hello World\n* Test"
-
-		self.dialogbox = DialogBox(x, y, 500, 250, self.dialog)
-
-	def run(self):
+def run(self):
 		while True:
+
+			self.dialog = "* Hello World\n* Test"
+			self.dialogbox = DialogBox(x, y, 500, 250, self.dialog)
 
 			sprite_sheet_image = pygame.image.load('doux.png').convert_alpha()
 			sprite_sheet = spritesheet.SpriteSheet(sprite_sheet_image)
@@ -39,7 +34,6 @@ class Game:
 			frame = 0
 			step_counter = 0
 
-			self.screen.fill((BG))
 			#update animation
 			current_time = pygame.time.get_ticks()
 			if current_time-last_update>=animation_cooldown:
@@ -75,11 +69,10 @@ class Game:
 						action +=1
 						frame = 0
 				#self.screen.fill("purple")
+				run(self)
 				self.dialogbox.render()
-				pygame.display.update()
 
-game = Game()
-game.run()
+pygame.display.update()
 
 
 
